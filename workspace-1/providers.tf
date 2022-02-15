@@ -18,14 +18,6 @@ provider "google" {
   zone    = "us-central1-c"
 }
 
-data "terraform_remote_state" "service-account" {
-  backend = "gcs"
-  config = {
-    bucket  = "dlyle-state-bucket"
-    prefix  = "terraform/state/service-acct"
-  }
-}
-
 provider "databricks" {
   alias                  = "workspace"
   host                   = var.workspace_host
