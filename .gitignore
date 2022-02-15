@@ -1,4 +1,3 @@
-terraform.tfvars
 .idea
 .terraform*
 *.iml
