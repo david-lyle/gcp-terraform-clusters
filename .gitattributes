@@ -1,2 +1,2 @@
-terraform.tfvars filter=git-crypt diff=git-crypt
-.gitattributes !filter !diff`
+*.tfvars filter=git-crypt diff=git-crypt
+.gitattributes !filter !diff
