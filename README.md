@@ -1,20 +1,20 @@
-#Databricks GCP Terraform Example
+# Databricks GCP Terraform Example
 
-###Prereqs
+### Prereqs
 This project supports the creation and population of 2 Databricks workspaces with example Clusters/Pools/Users/Groups/Jobs/etc. Workspace 1 should be provisioned using the Databricks [admin page](https://accounts.gcp.databricks.com/). 
 
 Workspace 2 is created automatically by Terraform.
 
-###File of Interest
-####workspace-1/providers.tf
+### File of Interest
+#### workspace-1/providers.tf
 You can modify the Google provider to match the region of your pre-provisioned workspace.
 
-####workspace-2/providers.tf
+#### workspace-2/providers.tf
 As above, you can modify the Google provider to target the region where you'd like the workspace provisioned.
 
 In addition, change 'google_service_account' in the Databricks providers to match the service account you've created for provisioning.
 
-####workspace-1/terraform.tfvars
+#### workspace-1/terraform.tfvars
 ```terraform
 google_project = "<your google project name>"
 databricks_account_id = "<your databricks account id>"
@@ -33,7 +33,7 @@ user_map = {
   }
 }
 ```
-####workspace-2/terraform.tfvars
+#### workspace-2/terraform.tfvars
 ```terraform
 google_project = "<your google project name>"
 databricks_account_id = "<your databricks account id>"
