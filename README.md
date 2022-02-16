@@ -1,9 +1,7 @@
 #Databricks GCP Terraform Example
 
 ###Prereqs
-This project supports the creation and population of 2 Databricks workspaces with example Clusters/Pools/Users/Groups/Jobs/etc. Workspace 1 should be provisioned using the Databricks [admin page](https://accounts.gcp.databricks.com/). 
-
-Workspace 2 is created automatically by Terraform.
+This project supports the creation and population of 2 Databricks workspaces with example Clusters/Pools/Users/Groups/Jobs/etc. 
 
 ###File of Interest
 ####workspace-1/providers.tf
@@ -42,11 +40,11 @@ databricks_account_id = "<your databricks account id>"
 user_map = {
   "foo@example.com" = {
     admin   = true
-    cs10011 = true
+    groups = ["list", "of", "groups"]
   }
   "bar@example.com" = {
     admin   = false
-    cs10011 = false
+    groups = []
   }
 }
 ```

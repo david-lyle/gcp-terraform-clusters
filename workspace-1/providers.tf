@@ -18,9 +18,24 @@ provider "google" {
   zone    = "us-central1-c"
 }
 
+data "terraform_remote_state" "service-account" {
+  backend = "gcs"
+  config = {
+    bucket  = "dlyle-state-bucket"
+    prefix  = "terraform/state/service-acct"
+  }
+}
+
+provider "databricks" {
+  alias                  = "accounts"
+  host                   = "https://accounts.gcp.databricks.com"
+  google_service_account = data.terraform_remote_state.service-account.outputs.service_account
+  token                  = ""
+}
+
 provider "databricks" {
   alias                  = "workspace"
-  host                   = var.workspace_host
-  google_service_account = ""
-  token                  = var.databricks_token
+  host                   = module.workspace-1-workspace.workspace_url
+  google_service_account = data.terraform_remote_state.service-account.outputs.service_account
+  token                  = ""
 }

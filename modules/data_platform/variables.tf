@@ -1,6 +1,6 @@
-variable user_map {
-  type = map(object({
-    admin = bool
-    cs10011 = bool
-  }))
+variable cost_center_10011_authorized_group {
+  type = string
+}
+variable repo_map {
+  type = map(string)
 }

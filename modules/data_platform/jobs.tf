@@ -13,7 +13,7 @@ resource "databricks_job" "warm_pool_402" {
       PYSPARK_PYTHON = "/databricks/python3/bin/python3"
     }
     policy_id        = databricks_cluster_policy.cost_center_10011.id
-    num_workers      = 3
+    num_workers      = 8
     instance_pool_id = databricks_instance_pool.dlyle_cluster_pool.id
     custom_tags = {
       CostCenter = "10011"

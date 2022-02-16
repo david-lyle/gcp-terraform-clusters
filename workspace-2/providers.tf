@@ -35,7 +35,7 @@ provider "databricks" {
 
 provider "databricks" {
   alias                  = "workspace"
-  host                   = module.cluster-2-workspace.workspace_url
+  host                   = module.workspace-2-workspace.workspace_url
   google_service_account = data.terraform_remote_state.service-account.outputs.service_account
   token                  = ""
 }
