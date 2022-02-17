@@ -8,14 +8,14 @@ terraform {
   }
   backend "gcs" {
     bucket = "dlyle-state-bucket"
-    prefix = "terraform/state/workspace-david_lyle-cluster-1"
+    prefix = "terraform/state/shards"    
   }
 }
 
 provider "google" {
   project = var.google_project
-  region  = "us-central1"
-  zone    = "us-central1-c"
+  region  = var.region
+  zone    = var.zone
 }
 
 data "terraform_remote_state" "service-account" {
@@ -35,7 +35,7 @@ provider "databricks" {
 
 provider "databricks" {
   alias                  = "workspace"
-  host                   = module.workspace-1-workspace.workspace_url
+  host                   = module.workspace.workspace_url
   google_service_account = data.terraform_remote_state.service-account.outputs.service_account
   token                  = ""
 }

@@ -3,49 +3,47 @@
 ### Prereqs
 This project supports the creation and population of 2 Databricks workspaces with example Clusters/Pools/Users/Groups/Jobs/etc. 
 
+Shard state separation is maintained by using [terraform state workspces](https://www.terraform.io/language/state/workspaces).
 
 ### File of Interest
-#### workspace-1/providers.tf
+#### workspaces/providers.tf
 You can modify the Google provider to match the region of your pre-provisioned workspace.
-
-#### workspace-2/providers.tf
-As above, you can modify the Google provider to target the region where you'd like the workspace provisioned.
 
 In addition, change 'google_service_account' in the Databricks providers to match the service account you've created for provisioning.
 
-#### workspace-1/terraform.tfvars
+#### workspaces/terrraform.tfvars
+Define the user_map here if the users are the same on all shards as shown below:
 ```terraform
-google_project = "<your google project name>"
-databricks_account_id = "<your databricks account id>"
-databricks_token = "<your databricks PAT>"
-workspace_host = "https://<workspace_id>.gcp.databricks.com"
-#user map contains all the users you want provisioned as well as 
-#an example of group membership
 user_map = {
   "foo@example.com" = {
     admin   = true
-    cs10011 = true
-  }
-  "bar@example.com" = {
-    admin   = false
-    cs10011 = false
-  }
-}
-```
-#### workspace-2/terraform.tfvars
-```terraform
-google_project = "<your google project name>"
-databricks_account_id = "<your databricks account id>"
-#user map contains all the users you want provisioned as well as 
-#an example of group membership
-user_map = {
-  "foo@example.com" = {
-    admin   = true
-    groups = ["list", "of", "groups"]
+    groups = ["list", "of", "group", "memberships"]
   }
   "bar@example.com" = {
     admin   = false
     groups = []
   }
 }
+```
+
+Note: admins are automatically added to the 'admin' group and all users are automatically added to the 'users' group.
+
+Also add the Google Project and Databricks account ID.
+```terraform
+google_project = "<google-project-id>"
+databricks_account_id = "<databricks-account-id>"
+```
+
+#### workspces/workspace-1/terraform.tfvars
+```terraform
+workspace_name = "<workspace 1 name>"
+region = "<region>"
+zone = "<zone>"
+```
+
+#### workspace-2/terraform.tfvars
+```terraform
+workspace_name = "<workspace 2 name>"
+region = "<region>"
+zone = "<zone>"
 ```
